@@ -3,7 +3,7 @@
 
 A behavior-driven development (BDD) project simulating hospital medical device 
 asset tracking, built to demonstrate test automation practices used in medical 
-device software development (Philips-style Gherkin → C# automation flow).
+device software development.
 
 ## Tech Stack
 - **C# / .NET 8** — Core domain logic
