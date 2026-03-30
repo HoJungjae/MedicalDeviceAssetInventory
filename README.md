@@ -1,3 +1,4 @@
+![BDD Tests](https://github.com/HoJungjae/MedicalDeviceAssetInventory/actions/workflows/dotnet-tests.yml/badge.svg)
 # Medical Device Asset Inventory Management System
 ### BDD Test Automation with C# + Reqnroll (Gherkin)
 
