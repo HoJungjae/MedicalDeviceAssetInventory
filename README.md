@@ -21,7 +21,7 @@ device software development.
 ## Test Results
 9 scenarios, 9 passed
 
-## How It Mirrors Philips Automation Practices
+## Automation Practices Simulated
 - Requirements translated directly into human-readable Gherkin scenarios
 - Step definitions in C# bind business language to testable code
 - Validates reliability for safety-critical medical device workflows
