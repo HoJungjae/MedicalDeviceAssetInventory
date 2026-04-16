@@ -115,20 +115,26 @@ namespace MedicalDeviceAssetInventory.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/AssetInventory.feature.ndjson", 11);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/AssetInventory.feature.ndjson", 16);
         }
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("Add a new valid medical asset")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-001")]
+        [global::NUnit.Framework.CategoryAttribute("SmokeTest")]
+        [global::NUnit.Framework.CategoryAttribute("HappyPath")]
         public async global::System.Threading.Tasks.Task AddANewValidMedicalAsset()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-001",
+                    "SmokeTest",
+                    "HappyPath"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Add a new valid medical asset", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 10
+#line 12
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -141,14 +147,14 @@ namespace MedicalDeviceAssetInventory.Features
 #line 7
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 11
+#line 13
     await testRunner.WhenAsync("I add an asset with serial \"PM-12345\", model \"Philips IntelliVue Monitor\", status" +
                         " \"Available\", location \"ICU-3\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 12
+#line 14
     await testRunner.ThenAsync("the asset should be successfully added to the inventory", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 13
+#line 15
     await testRunner.AndAsync("the total number of assets should be 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -157,46 +163,18 @@ namespace MedicalDeviceAssetInventory.Features
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("Prevent adding asset with empty serial number")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-002")]
+        [global::NUnit.Framework.CategoryAttribute("NegativeTest")]
+        [global::NUnit.Framework.CategoryAttribute("Validation")]
         public async global::System.Threading.Tasks.Task PreventAddingAssetWithEmptySerialNumber()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-002",
+                    "NegativeTest",
+                    "Validation"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Prevent adding asset with empty serial number", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
-            string[] tagsOfRule = ((string[])(null));
-            global::Reqnroll.RuleInfo ruleInfo = null;
-#line 15
-  this.ScenarioInitialize(scenarioInfo, ruleInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                await testRunner.SkipScenarioAsync();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 7
-  await this.FeatureBackgroundAsync();
-#line hidden
-#line 16
-    await testRunner.WhenAsync("I attempt to add an asset with serial \"\", model \"Philips Pump\", status \"Available" +
-                        "\", location \"OR-1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 17
-    await testRunner.ThenAsync("I should receive a validation error \"Serial number cannot be empty\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Query an existing asset by serial number")]
-        public async global::System.Threading.Tasks.Task QueryAnExistingAssetBySerialNumber()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "2";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Query an existing asset by serial number", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 19
@@ -213,12 +191,50 @@ namespace MedicalDeviceAssetInventory.Features
   await this.FeatureBackgroundAsync();
 #line hidden
 #line 20
-    await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+    await testRunner.WhenAsync("I attempt to add an asset with serial \"\", model \"Philips Pump\", status \"Available" +
+                        "\", location \"OR-1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 21
+    await testRunner.ThenAsync("I should receive a validation error \"Serial number cannot be empty\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Query an existing asset by serial number")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-003")]
+        [global::NUnit.Framework.CategoryAttribute("HappyPath")]
+        public async global::System.Threading.Tasks.Task QueryAnExistingAssetBySerialNumber()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-003",
+                    "HappyPath"};
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "2";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Query an existing asset by serial number", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 25
+  this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+  await this.FeatureBackgroundAsync();
+#line hidden
+#line 26
+    await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 27
     await testRunner.WhenAsync("I query the asset by serial \"PM-12345\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 22
+#line 28
     await testRunner.ThenAsync("the returned asset should have model \"Philips IntelliVue Monitor\" and status \"Ava" +
                         "ilable\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
@@ -228,15 +244,21 @@ namespace MedicalDeviceAssetInventory.Features
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("Prevent duplicate serial numbers")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-004")]
+        [global::NUnit.Framework.CategoryAttribute("NegativeTest")]
+        [global::NUnit.Framework.CategoryAttribute("Validation")]
         public async global::System.Threading.Tasks.Task PreventDuplicateSerialNumbers()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-004",
+                    "NegativeTest",
+                    "Validation"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "3";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Prevent duplicate serial numbers", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 24
+#line 32
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -249,14 +271,14 @@ namespace MedicalDeviceAssetInventory.Features
 #line 7
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 25
+#line 33
     await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 26
+#line 34
     await testRunner.WhenAsync("I attempt to add an asset with serial \"PM-12345\", model \"Philips Pump\", status \"A" +
                         "vailable\", location \"OR-1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 27
+#line 35
     await testRunner.ThenAsync("I should receive a validation error \"Asset with this serial number already exists" +
                         "\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
@@ -266,88 +288,16 @@ namespace MedicalDeviceAssetInventory.Features
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("Update asset status")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-005")]
+        [global::NUnit.Framework.CategoryAttribute("HappyPath")]
         public async global::System.Threading.Tasks.Task UpdateAssetStatus()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-005",
+                    "HappyPath"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "4";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Update asset status", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
-            string[] tagsOfRule = ((string[])(null));
-            global::Reqnroll.RuleInfo ruleInfo = null;
-#line 29
-  this.ScenarioInitialize(scenarioInfo, ruleInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                await testRunner.SkipScenarioAsync();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 7
-  await this.FeatureBackgroundAsync();
-#line hidden
-#line 30
-    await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 31
-    await testRunner.WhenAsync("I update the status of asset \"PM-12345\" to \"In Maintenance\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 32
-    await testRunner.ThenAsync("the asset with serial \"PM-12345\" should have status \"In Maintenance\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Remove an asset from inventory")]
-        public async global::System.Threading.Tasks.Task RemoveAnAssetFromInventory()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "5";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Remove an asset from inventory", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
-            string[] tagsOfRule = ((string[])(null));
-            global::Reqnroll.RuleInfo ruleInfo = null;
-#line 34
-  this.ScenarioInitialize(scenarioInfo, ruleInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                await testRunner.SkipScenarioAsync();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 7
-  await this.FeatureBackgroundAsync();
-#line hidden
-#line 35
-    await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 36
-    await testRunner.WhenAsync("I remove the asset with serial \"PM-12345\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 37
-    await testRunner.ThenAsync("the total number of assets should be 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Reject assets with invalid status")]
-        [global::NUnit.Framework.TestCaseAttribute("Broken", "6", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Retired", "7", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Unknown", "8", null)]
-        public async global::System.Threading.Tasks.Task RejectAssetsWithInvalidStatus(string status, string @__pickleIndex, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Status", status);
-            string pickleIndex = @__pickleIndex;
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Reject assets with invalid status", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 39
@@ -364,11 +314,232 @@ namespace MedicalDeviceAssetInventory.Features
   await this.FeatureBackgroundAsync();
 #line hidden
 #line 40
+    await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 41
+    await testRunner.WhenAsync("I update the status of asset \"PM-12345\" to \"In Maintenance\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 42
+    await testRunner.ThenAsync("the asset with serial \"PM-12345\" should have status \"In Maintenance\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Remove an asset from inventory")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-006")]
+        [global::NUnit.Framework.CategoryAttribute("HappyPath")]
+        public async global::System.Threading.Tasks.Task RemoveAnAssetFromInventory()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-006",
+                    "HappyPath"};
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "5";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Remove an asset from inventory", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 46
+  this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+  await this.FeatureBackgroundAsync();
+#line hidden
+#line 47
+    await testRunner.GivenAsync("an asset with serial \"PM-12345\" exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 48
+    await testRunner.WhenAsync("I remove the asset with serial \"PM-12345\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 49
+    await testRunner.ThenAsync("the total number of assets should be 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Reject assets with invalid status")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-007")]
+        [global::NUnit.Framework.CategoryAttribute("NegativeTest")]
+        [global::NUnit.Framework.CategoryAttribute("Validation")]
+        [global::NUnit.Framework.CategoryAttribute("BoundaryTest")]
+        [global::NUnit.Framework.TestCaseAttribute("Broken", "6", null)]
+        [global::NUnit.Framework.TestCaseAttribute("Retired", "7", null)]
+        [global::NUnit.Framework.TestCaseAttribute("Unknown", "8", null)]
+        public async global::System.Threading.Tasks.Task RejectAssetsWithInvalidStatus(string status, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Requirement:REQ-007",
+                    "NegativeTest",
+                    "Validation",
+                    "BoundaryTest"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Status", status);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Reject assets with invalid status", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 53
+  this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+  await this.FeatureBackgroundAsync();
+#line hidden
+#line 54
     await testRunner.WhenAsync(string.Format("I attempt to add an asset with serial \"PM-99999\", model \"Philips Monitor\", status" +
                             " \"{0}\", location \"ICU-1\"", status), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 55
     await testRunner.ThenAsync("I should receive a validation error \"Invalid status\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Prevent adding asset with empty model name")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-008")]
+        [global::NUnit.Framework.CategoryAttribute("NegativeTest")]
+        [global::NUnit.Framework.CategoryAttribute("Validation")]
+        public async global::System.Threading.Tasks.Task PreventAddingAssetWithEmptyModelName()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-008",
+                    "NegativeTest",
+                    "Validation"};
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "9";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Prevent adding asset with empty model name", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 65
+  this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+  await this.FeatureBackgroundAsync();
+#line hidden
+#line 66
+    await testRunner.WhenAsync("I attempt to add an asset with serial \"PM-99998\", model \"\", status \"Available\", l" +
+                        "ocation \"ICU-1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 67
+    await testRunner.ThenAsync("I should receive a validation error \"Model cannot be empty\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Accept assets with valid status values")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-009")]
+        [global::NUnit.Framework.CategoryAttribute("HappyPath")]
+        [global::NUnit.Framework.CategoryAttribute("BoundaryTest")]
+        [global::NUnit.Framework.TestCaseAttribute("PM-00001", "Available", "10", null)]
+        [global::NUnit.Framework.TestCaseAttribute("PM-00002", "In Maintenance", "11", null)]
+        [global::NUnit.Framework.TestCaseAttribute("PM-00003", "Unavailable", "12", null)]
+        public async global::System.Threading.Tasks.Task AcceptAssetsWithValidStatusValues(string serial, string status, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Requirement:REQ-009",
+                    "HappyPath",
+                    "BoundaryTest"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Serial", serial);
+            argumentsOfScenario.Add("Status", status);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Accept assets with valid status values", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 71
+  this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+  await this.FeatureBackgroundAsync();
+#line hidden
+#line 72
+    await testRunner.WhenAsync(string.Format("I add an asset with serial \"{0}\", model \"Philips Monitor\", status \"{1}\", location" +
+                            " \"ICU-1\"", serial, status), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 73
+    await testRunner.ThenAsync("the asset should be successfully added to the inventory", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Asset location defaults to Unknown when empty")]
+        [global::NUnit.Framework.CategoryAttribute("Requirement:REQ-010")]
+        [global::NUnit.Framework.CategoryAttribute("EdgeCase")]
+        public async global::System.Threading.Tasks.Task AssetLocationDefaultsToUnknownWhenEmpty()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Requirement:REQ-010",
+                    "EdgeCase"};
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "13";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Asset location defaults to Unknown when empty", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 83
+  this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+  await this.FeatureBackgroundAsync();
+#line hidden
+#line 84
+    await testRunner.WhenAsync("I add an asset with serial \"PM-88888\", model \"Philips Monitor\", status \"Available" +
+                        "\", location \"\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 85
+    await testRunner.ThenAsync("the asset should be successfully added to the inventory", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
