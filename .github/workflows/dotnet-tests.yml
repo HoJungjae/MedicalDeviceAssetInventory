@@ -25,5 +25,20 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Run BDD Tests
-      run: dotnet test --no-build --verbosity normal
+    # Tier 1: Run smoke tests first — fastest feedback on critical paths
+    - name: Run Smoke Tests (Tier 1 - Critical Path)
+      run: dotnet test --no-build --verbosity normal --filter "Category=SmokeTest"
+
+    # Tier 2: Run full BDD test suite
+    - name: Run Full BDD Test Suite (Tier 2 - All Scenarios)
+      run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+
+    # Publish test results for traceability (IEC 62304 audit readiness)
+    - name: Publish Test Results
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: BDD Test Results
+        path: '**/test-results.trx'
+        reporter: dotnet-trx
+        fail-on-error: true
